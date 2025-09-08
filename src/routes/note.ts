@@ -1,0 +1,20 @@
+import express from "express";
+import { authorization } from "../middleware/authorization";
+import {
+  AddNewNote,
+  DeleteNote,
+  GetAllNoteDatas,
+  GetNoteDataByUserId,
+  GetNoteByNoteId,
+  UpdateNote,
+} from "../controller/note";
+const router = express.Router();
+
+router.post("/note", [authorization], AddNewNote);
+router.get("/note", [authorization], GetAllNoteDatas);
+router.get("/user/:userId/note", [authorization], GetNoteDataByUserId);
+router.get("/note/:noteId", [authorization], GetNoteByNoteId);
+router.delete("/note/:noteId", [authorization], DeleteNote);
+router.patch("/note/:noteId", [authorization], UpdateNote);
+
+export default router;

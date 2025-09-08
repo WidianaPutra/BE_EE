@@ -61,7 +61,7 @@ async function Login(req: Request, res: Response) {
       });
     }
 
-    const jwt = JwtGenerator({ userId: userData.id, date: new Date() });
+    const jwt = await JwtGenerator({ userId: userData.id, date: new Date() });
     Logger({
       IP: req.ip,
       service: "AUTH",
@@ -69,7 +69,6 @@ async function Login(req: Request, res: Response) {
       detail: `User successfully login ${userData.id}`,
     });
     return res.status(200).json({
-      status: 200,
       data: {
         token: jwt,
         ...withoutPassword(userData),
@@ -125,7 +124,7 @@ async function Register(req: Request, res: Response) {
     userData = await prisma.user.create({
       data: {
         email,
-        password: await hash(password, 10),
+        password: await hash(password, BCRYPT_SALT),
         username,
       },
     });
@@ -138,8 +137,7 @@ async function Register(req: Request, res: Response) {
       status: "SUCCESS",
       detail: `User with email ${userData.email} was successfully created`,
     });
-    return res.status(200).json({
-      status: 200,
+    return res.status(201).json({
       data: {
         token: jwt,
         ...withoutPassword(userData),

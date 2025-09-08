@@ -1,6 +1,6 @@
 export type LoggerTypes = {
   IP: string | null | undefined;
   status: "SUCCESS" | "WARNING" | "ERROR" | "FATAL";
-  service: "PRODUCT" | "USER" | "AUTH";
+  service: "NOTE" | "USER" | "AUTH" | "GENERAL";
   detail: string;
 };
