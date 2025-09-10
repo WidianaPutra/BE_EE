@@ -86,8 +86,7 @@ async function Login(req: Request, res: Response) {
 async function Register(req: Request, res: Response) {
   const { email, password, username } = req.body;
   let userData: User | null = null;
-  const { email, password, username } = req.body;
-  let userData: User | null = null;
+
   try {
     if (!trim([email, password, username])) {
       Logger({
