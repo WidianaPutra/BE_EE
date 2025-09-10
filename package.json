@@ -3,7 +3,11 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "start": "bun run src/index"
+    "build": "tsc",
+    "start": "node dist/index.js"
+  },
+  "engines": {
+    "node": "18.x"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
