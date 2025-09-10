@@ -1,9 +1,7 @@
 import express from "express";
-import session from "express-session";
+// import session from "express-session";
 import env from "dotenv";
 import cors from "cors";
-import { corsConfig } from "./config/cors";
-import { sessionConfig } from "./config/session";
 env.config();
 
 // router
@@ -21,6 +19,6 @@ app.use("/api", AuthRouter);
 app.use("/api", UserRouter);
 app.use("/api", NoteRouter);
 
-// app.listen(PORT, () => console.log(`server running on port: ${PORT}`));
+app.listen(PORT, () => console.log(`server running on port: ${PORT}`));
 
 export default app;
