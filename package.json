@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/index.js"
+    "build": "tsc && prisma generate",
+    "start": "node dist/index.js",
+    "dev": "bun run src/index.ts"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
