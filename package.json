@@ -1,4 +1,9 @@
 {
+  "name": "bun-backend-test",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "bun run api/index.ts"
+  },
   "dependencies": {
     "@prisma/client": "^6.15.0",
     "@types/bcrypt": "^6.0.0",

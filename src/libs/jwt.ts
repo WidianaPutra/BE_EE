@@ -1,9 +1,8 @@
 import jwt from "jsonwebtoken";
-import { Logger } from "../events/logger";
 
 const JWT_SECRATE = process.env.JWT_SECRATE!;
 
-export const JwtGenerator = async (data: any) => {
+export const JwtGenerator = (data: any) => {
   return jwt.sign(data, JWT_SECRATE, { expiresIn: "1h" });
 };
 

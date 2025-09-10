@@ -30,7 +30,7 @@ async function AddNewNote(req: Request, res: Response) {
         IP: req.ip,
         service: "NOTE",
         status: "WARNING",
-        detail: `Data isn't complete`,
+        detail: `Attempt to create note with invalid userId`,
       });
       return res.status(404).json({ error: { detail: "UserId not found" } });
     }
@@ -47,7 +47,7 @@ async function AddNewNote(req: Request, res: Response) {
       IP: req.ip,
       service: "NOTE",
       status: "WARNING",
-      detail: `Note with id: ${noteData} was successfully created`,
+      detail: `Note with id: ${noteData.id} was successfully created`,
     });
 
     return res.status(201).json({
@@ -56,7 +56,7 @@ async function AddNewNote(req: Request, res: Response) {
   } catch (err) {
     Logger({
       IP: req.ip,
-      service: "AUTH",
+      service: "NOTE",
       status: "FATAL",
       detail: "Internal server error",
     });
