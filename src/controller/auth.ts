@@ -1,10 +1,10 @@
 import type { Request, Response } from "express";
-import { Logger } from "../events/logger";
+import { Logger } from "../events/logger.js";
 import { compare, hash } from "bcrypt";
-import { trim } from "../libs/trim";
-import { prisma } from "../libs/prisma";
-import { JwtGenerator } from "../libs/jwt";
-import { withoutPassword } from "../libs/withoutPassword";
+import { trim } from "../libs/trim.js";
+import { prisma } from "../libs/prisma.js";
+import { JwtGenerator } from "../libs/jwt.js";
+import { withoutPassword } from "../libs/withoutPassword.js";
 import { User } from "@prisma/client";
 
 const BCRYPT_SALT = process.env.BCRYPT_SALT || 10;
@@ -125,6 +125,14 @@ async function Register(req: Request, res: Response) {
       },
     });
 
+    if (!userData) {
+      Logger({
+        IP: req.ip,
+        service: "AUTH",
+        status: "ERROR",
+        detail: `User data doesn't uploaded`,
+      });
+    }
     const jwt = JwtGenerator({ userId: userData.id, date: new Date() });
 
     Logger({
