@@ -14,7 +14,7 @@ import NoteRouter from "./routes/note";
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
 app.use(cors(corsConfig));
-app.use(session(sessionConfig));
+// app.use(session(sessionConfig));
 app.use(express.json());
 
 app.use("/api", AuthRouter);
