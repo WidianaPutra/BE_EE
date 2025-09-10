@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-import { Logger } from "../events/logger";
 
 const JWT_SECRATE = process.env.JWT_SECRATE!;
 

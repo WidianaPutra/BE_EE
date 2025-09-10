@@ -8,8 +8,8 @@ export const authorization = async (
   res: Response,
   next: NextFunction
 ) => {
-  const authToken = req.headers["authorization"]?.split(" ") || [];
-  if (authToken[0] !== "Bearer" || !authToken) {
+  const authToken = req.headers["authorization"]?.split(" ") || ["", ""];
+  if (authToken[0] != "Bearer" || !authToken) {
     Logger({
       IP: req.ip,
       service: "GENERAL",
@@ -19,7 +19,23 @@ export const authorization = async (
     return res.status(401).json({ error: { detail: "Unauthorized" } });
   }
 
-  const decodedToken = DecodeToken(authToken[1]);
+  let decodedToken: any = null;
+
+  try {
+    decodedToken = DecodeToken(authToken[1]);
+  } catch (err) {
+    //
+  }
+
+  if (decodedToken == null) {
+    Logger({
+      IP: req.ip,
+      service: "GENERAL",
+      status: "WARNING",
+      detail: `Attampt to request without invalid credentials`,
+    });
+    return res.status(401).json({ error: { detail: "Unauthorized" } });
+  }
 
   const userId = await prisma.user.findUnique({
     where: {

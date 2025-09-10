@@ -23,7 +23,6 @@ async function Login(req: Request, res: Response) {
         .status(400)
         .json({ error: { detail: "email and password required" } });
     }
-
     const userData = await prisma.user.findUnique({
       where: {
         email,
@@ -87,6 +86,8 @@ async function Login(req: Request, res: Response) {
 async function Register(req: Request, res: Response) {
   const { email, password, username } = req.body;
   let userData: User | null = null;
+  const { email, password, username } = req.body;
+  let userData: User | null = null;
   try {
     if (!trim([email, password, username])) {
       Logger({
@@ -99,7 +100,6 @@ async function Register(req: Request, res: Response) {
         .status(400)
         .json({ error: { detail: "email and password required" } });
     }
-
     userData = await prisma.user.findUnique({
       where: {
         email,
