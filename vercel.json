@@ -1,7 +1,7 @@
 {
   "functions": {
-    "api/index.ts": {
-      "runtime": "@godsreveal/vercel-bun@0.2.4"
+    "api/index": {
+      "runtime": "@vercel/node"
     }
   }
 }
