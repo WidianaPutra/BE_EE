@@ -6,9 +6,8 @@ import { withoutPassword } from "../libs/withoutPassword";
 import { trim } from "../libs/trim";
 
 async function GetUserDetails(req: Request, res: Response) {
+  const { userId } = req.params;
   try {
-    const { userId } = req.params;
-
     const userData = await prisma.user.findUnique({
       where: {
         id: userId,
@@ -55,10 +54,9 @@ async function GetUserDetails(req: Request, res: Response) {
 }
 
 async function GetAllUsers(req: Request, res: Response) {
+  const { search, note, today } = req.query;
+  let prismaQuery = {};
   try {
-    const { search, note, today } = req.query;
-    let prismaQuery = {};
-
     if (search) {
       prismaQuery = {
         ...prismaQuery,
