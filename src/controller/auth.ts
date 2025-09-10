@@ -124,7 +124,7 @@ async function Register(req: Request, res: Response) {
     userData = await prisma.user.create({
       data: {
         email,
-        password: await hash(password, BCRYPT_SALT),
+        password: await hash(password, 10),
         username,
       },
     });
@@ -150,6 +150,7 @@ async function Register(req: Request, res: Response) {
       status: "FATAL",
       detail: "Internal server error",
     });
+    console.log(err);
     return res.status(500).json({ message: "Internal server error" });
   }
 }
