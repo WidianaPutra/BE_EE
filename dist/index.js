@@ -4,9 +4,12 @@ import env from "dotenv";
 import cors from "cors";
 env.config();
 // router
-import AuthRouter from "./routes/auth.js";
-import UserRouter from "./routes/user.js";
-import NoteRouter from "./routes/note.js";
+// import AuthRouter from "./routes/auth.js";
+// import UserRouter from "./routes/user.js";
+// import NoteRouter from "./routes/note.js";
+const AuthRouter = require("./routes/auth");
+const UserRouter = require("./routes/user");
+const NoteRouter = require("./routes/note");
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
 app.use(cors());
