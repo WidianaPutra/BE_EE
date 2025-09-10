@@ -2,7 +2,7 @@
   "name": "bun-backend-test",
   "version": "1.0.0",
   "scripts": {
-    "start": "bun run api/index.ts"
+    "start": "bun run src/index"
   },
   "dependencies": {
     "@prisma/client": "^6.15.0",
