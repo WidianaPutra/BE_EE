@@ -10,9 +10,8 @@ import { User } from "@prisma/client";
 const BCRYPT_SALT = process.env.BCRYPT_SALT || 10;
 
 async function Login(req: Request, res: Response) {
+  const { email, password } = req.body;
   try {
-    const { email, password } = req.body;
-
     if (!trim([email, password])) {
       Logger({
         IP: req.ip,
@@ -86,11 +85,9 @@ async function Login(req: Request, res: Response) {
 }
 
 async function Register(req: Request, res: Response) {
+  const { email, password, username } = req.body;
+  let userData: User | null = null;
   try {
-    const { email, password, username } = req.body;
-
-    let userData: User | null = null;
-
     if (!trim([email, password, username])) {
       Logger({
         IP: req.ip,
@@ -124,7 +121,7 @@ async function Register(req: Request, res: Response) {
     userData = await prisma.user.create({
       data: {
         email,
-        password: await hash(password, BCRYPT_SALT),
+        password: await hash(password, 10),
         username,
       },
     });
@@ -150,6 +147,7 @@ async function Register(req: Request, res: Response) {
       status: "FATAL",
       detail: "Internal server error",
     });
+    console.log(err);
     return res.status(500).json({ message: "Internal server error" });
   }
 }
