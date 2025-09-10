@@ -13,7 +13,7 @@ import NoteRouter from "./routes/note";
 
 const app = express();
 const PORT = process.env.SERVER_PORT || 3000;
-app.use(cors(corsConfig));
+app.use(cors());
 // app.use(session(sessionConfig));
 app.use(express.json());
 
