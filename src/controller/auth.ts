@@ -85,6 +85,7 @@ async function Login(req: Request, res: Response) {
 }
 
 async function Register(req: Request, res: Response) {
+  //
   try {
     const { email, password, username } = req.body;
     let userData: User | null = null;
