@@ -4,9 +4,8 @@ import { Logger } from "../events/logger";
 import { trim } from "../libs/trim";
 
 async function AddNewNote(req: Request, res: Response) {
+  const { title, note, userId } = req.body;
   try {
-    const { title, note, userId } = req.body;
-
     if (!trim([title, note, userId])) {
       Logger({
         IP: req.ip,
@@ -65,10 +64,9 @@ async function AddNewNote(req: Request, res: Response) {
 }
 
 async function GetAllNoteDatas(req: Request, res: Response) {
+  const { search, user, today } = req.query;
+  let prismaQuery = {};
   try {
-    const { search, user, today } = req.query;
-    let prismaQuery = {};
-
     if (search) {
       prismaQuery = {
         ...prismaQuery,
@@ -139,10 +137,9 @@ async function GetAllNoteDatas(req: Request, res: Response) {
 }
 
 async function GetNoteDataByUserId(req: Request, res: Response) {
+  const { search, user, today } = req.query;
+  let prismaQuery = {};
   try {
-    const { search, user, today } = req.query;
-    let prismaQuery = {};
-
     if (search) {
       prismaQuery = {
         ...prismaQuery,
@@ -216,9 +213,8 @@ async function GetNoteDataByUserId(req: Request, res: Response) {
 }
 
 async function GetNoteByNoteId(req: Request, res: Response) {
+  const { noteId } = req.params;
   try {
-    const { noteId } = req.params;
-
     const noteData = await prisma.note.findUnique({
       where: {
         id: noteId,
@@ -254,9 +250,8 @@ async function GetNoteByNoteId(req: Request, res: Response) {
 }
 
 async function DeleteNote(req: Request, res: Response) {
+  const { noteId } = req.query;
   try {
-    const { noteId } = req.query;
-
     if (typeof noteId != "string") {
       Logger({
         IP: req.ip,
@@ -297,9 +292,8 @@ async function DeleteNote(req: Request, res: Response) {
 }
 
 async function UpdateNote(req: Request, res: Response) {
+  const { noteId } = req.query;
   try {
-    const { noteId } = req.query;
-
     if (typeof noteId != "string") {
       Logger({
         IP: req.ip,
