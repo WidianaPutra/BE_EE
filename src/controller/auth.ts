@@ -11,18 +11,18 @@ const BCRYPT_SALT = process.env.BCRYPT_SALT || 10;
 
 async function Login(req: Request, res: Response) {
   const { email, password } = req.body;
+  if (!trim([email, password])) {
+    Logger({
+      IP: req.ip,
+      service: "AUTH",
+      status: "WARNING",
+      detail: `Email and password required`,
+    });
+    return res
+      .status(400)
+      .json({ error: { detail: "email and password required" } });
+  }
   try {
-    if (!trim([email, password])) {
-      Logger({
-        IP: req.ip,
-        service: "AUTH",
-        status: "WARNING",
-        detail: `Email and password required`,
-      });
-      return res
-        .status(400)
-        .json({ error: { detail: "email and password required" } });
-    }
     const userData = await prisma.user.findUnique({
       where: {
         email,
@@ -87,18 +87,18 @@ async function Register(req: Request, res: Response) {
   const { email, password, username } = req.body;
   let userData: User | null = null;
 
+  if (!trim([email, password, username])) {
+    Logger({
+      IP: req.ip,
+      service: "AUTH",
+      status: "WARNING",
+      detail: `Email and password required`,
+    });
+    return res
+      .status(400)
+      .json({ error: { detail: "email and password required" } });
+  }
   try {
-    if (!trim([email, password, username])) {
-      Logger({
-        IP: req.ip,
-        service: "AUTH",
-        status: "WARNING",
-        detail: `Email and password required`,
-      });
-      return res
-        .status(400)
-        .json({ error: { detail: "email and password required" } });
-    }
     userData = await prisma.user.findUnique({
       where: {
         email,

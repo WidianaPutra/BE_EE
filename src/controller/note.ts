@@ -5,19 +5,18 @@ import { trim } from "../libs/trim";
 
 async function AddNewNote(req: Request, res: Response) {
   const { title, note, userId } = req.body;
+  if (!trim([title, note, userId])) {
+    Logger({
+      IP: req.ip,
+      service: "NOTE",
+      status: "WARNING",
+      detail: `Data isn't complete`,
+    });
+    return res
+      .status(400)
+      .json({ error: { detail: "title and note required" } });
+  }
   try {
-    if (!trim([title, note, userId])) {
-      Logger({
-        IP: req.ip,
-        service: "NOTE",
-        status: "WARNING",
-        detail: `Data isn't complete`,
-      });
-      return res
-        .status(400)
-        .json({ error: { detail: "title and note required" } });
-    }
-
     const existingUser = await prisma.user.findUnique({
       where: {
         id: userId,
