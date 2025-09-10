@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
-import { Logger } from "../events/logger";
-import { DecodeToken } from "../libs/jwt";
-import { prisma } from "../libs/prisma";
+import { Logger } from "../events/logger.js";
+import { DecodeToken } from "../libs/jwt.js";
+import { prisma } from "../libs/prisma.js";
 
 export const authorization = async (
   req: Request,

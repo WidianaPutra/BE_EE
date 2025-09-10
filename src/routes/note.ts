@@ -1,5 +1,5 @@
 import express from "express";
-import { authorization } from "../middleware/authorization";
+import { authorization } from "../middleware/authorization.js";
 import {
   AddNewNote,
   DeleteNote,
@@ -7,7 +7,7 @@ import {
   GetNoteDataByUserId,
   GetNoteByNoteId,
   UpdateNote,
-} from "../controller/note";
+} from "../controller/note.js";
 const router = express.Router();
 
 router.post("/note", [authorization], AddNewNote);

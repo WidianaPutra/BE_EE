@@ -1,7 +1,7 @@
 import type { Response, Request } from "express";
-import { prisma } from "../libs/prisma";
-import { Logger } from "../events/logger";
-import { trim } from "../libs/trim";
+import { prisma } from "../libs/prisma.js";
+import { Logger } from "../events/logger.js";
+import { trim } from "../libs/trim.js";
 
 async function AddNewNote(req: Request, res: Response) {
   const { title, note, userId } = req.body;

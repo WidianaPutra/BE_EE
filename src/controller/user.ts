@@ -1,9 +1,9 @@
 import type { Request, Response } from "express";
-import { prisma } from "../libs/prisma";
+import { prisma } from "../libs/prisma.js";
 import { User } from "@prisma/client";
-import { Logger } from "../events/logger";
-import { withoutPassword } from "../libs/withoutPassword";
-import { trim } from "../libs/trim";
+import { Logger } from "../events/logger.js";
+import { withoutPassword } from "../libs/withoutPassword.js";
+import { trim } from "../libs/trim.js";
 
 async function GetUserDetails(req: Request, res: Response) {
   const { userId } = req.params;

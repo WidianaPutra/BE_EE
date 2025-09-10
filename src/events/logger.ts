@@ -1,4 +1,4 @@
-import { LoggerTypes } from "../types/logger";
+import { LoggerTypes } from "../types/logger.js";
 
 export const Logger = ({ IP = null, status, service, detail }: LoggerTypes) => {
   console.log({
