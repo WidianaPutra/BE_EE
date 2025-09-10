@@ -10,7 +10,7 @@ import UserRouter from "./routes/user.js";
 import NoteRouter from "./routes/note.js";
 
 const app = express();
-const PORT = process.env.SERVER_PORT || 3000;
+const PORT: Number = Number(process.env.SERVER_PORT) || 3000;
 app.use(cors());
 // app.use(session(sessionConfig));
 app.use(express.json());
